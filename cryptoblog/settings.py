@@ -45,7 +45,14 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+    'django_summernote',
     'blog',
+]
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://appname.herokuapp.com'
 ]
 
 MIDDLEWARE = [
