@@ -5,11 +5,10 @@ from cloudinary.models import CloudinaryField
 STATUS = ((0, "Draft"), (1, "Published"))
 
 CATEGORIE_CHOICES = (
-   ('CN', 'Crypto News'),
-   ('BTC', 'Bitcoin'),
-   ('Exg', 'Exchange'),
-   ('DCZ', 'Decentralize'),
-   ('SCM', 'Scams'),
+   ('Crypto News', 'Crypto News'),
+   ('Bitcoin', 'Bitcoin'),
+   ('Exchange', 'Exchange'),
+   ('Decentralize', 'Decentralize'),
 )
 
 
