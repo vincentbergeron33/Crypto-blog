@@ -2,14 +2,19 @@
 
 {% block content %}
 <section class="py-5">
+    <h1>Crypto News</h1>
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            {% for post in post_list %}
+        {% with news_counter=0 %}
+        {% for post in post_list %}
+        {% if post.categorie == 'Crypto News' %}
+        {{ news_counter=+1 }}
+            {% if news_counter < 5 %}
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
                     {% if "placeholder" in post.featured_image.url %}
-                    <img class="card-img-top" src="https://images.pexels.com/photos/6772076/pexels-photo-6772076.jpeg" alt="..." />
+                    <img class="card-img-top" src="https://images.pexels.com/photos/4960464/pexels-photo-4960464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="..." />
                     {% else %}
                     <img class="card-img-top" src="{{ post.featured_image.url }}" alt="..." />
                     {% endif %}
@@ -28,13 +33,65 @@
                     </div>
                 </div>
             </div>
-        {% if forloop.counter|divisibleby:4 %}
-        </div>
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% endif %}
         {% endif %}
         {% endfor %}
+        {% endwith %}
         </div>
     </div>
 </section>
+{% if is_paginated %}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li><a href="#" class="page-link"> More &raquo;</a></li>
+    </ul>
+</nav>
+{% endif %}
+
+
+<section class="py-5">
+    <h1>Bitcoin</h1>
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% with bitcoin_counter=0 %}
+        {% for post in post_list %}
+        {% if post.categorie == 'Bitcoin' %}
+        {{ bitcoin_counter|add:'1' }}
+            {% if bitcoin_counter < 5 %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    {% if "placeholder" in post.featured_image.url %}
+                    <img class="card-img-top" src="https://images.pexels.com/photos/4960464/pexels-photo-4960464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="..." />
+                    {% else %}
+                    <img class="card-img-top" src="{{ post.featured_image.url }}" alt="..." />
+                    {% endif %}
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Post title-->
+                            <h5 class="fw-bolder">{{ post.title }}</h5>
+                            <!-- Product price-->
+                            {{ post.excerpt }}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Full article</a></div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% endwith %}
+        </div>
+    </div>
+</section>
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li><a href="#" class="page-link"> More &raquo;</a></li>
+    </ul>
+</nav>
 
 {% endblock %}
