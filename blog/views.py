@@ -9,8 +9,9 @@ class PostList(View):
         all_posts = []
         for each_category in categories:
             category_posts = Post.objects.filter(categorie=each_category)[:4]
-            all_posts.append({"category": each_category, "posts": category_posts})
-        
+            all_posts.append(
+                {"category": each_category, "posts": category_posts})
+       
         return render(request, "index.html", {
           "all_posts": all_posts,
         })
@@ -21,15 +22,17 @@ class PostList(View):
 
 
 class CategoryPosts(View):
-     def get(self, request, category_name, *args, **kwargs):
+    def get(self, request, category_name, *args, **kwargs):
         queryset = Post.objects.filter(categorie=category_name)
         return render(
             request,
             "category_posts.html",
             {
                 "posts": queryset,
+                "categorie": category_name
             },
         )
+
 
 class PostDetail(View):
     def get(self, request, slug, *args, **kwargs):
