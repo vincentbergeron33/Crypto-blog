@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-*731yqdl_fm0*#bp+((g2l%6v14g_#$73zc9n2_@)drdyl27u2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-vincentberge-cryptoblog-5qqh3cgtawk.ws-eu99.gitpod.io', "cryptoblog.herokuapp.com", "localhost"]
+ALLOWED_HOSTS = ['8000-vincentberge-cryptoblog-qnas4ejmqlx.ws-eu99.gitpod.io', "cryptoblog.herokuapp.com", "localhost"]
 
 
 # Application definition
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'django_summernote',
+    'crispy_forms',
     'blog',
 ]
 
@@ -59,6 +60,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 CSRF_TRUSTED_ORIGINS = [
     'https://appname.herokuapp.com'

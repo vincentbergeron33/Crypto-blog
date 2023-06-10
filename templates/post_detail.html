@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% load crispy_forms_tags %}
 
 <div class="masthead">
     <div class="container">
@@ -23,6 +24,76 @@
             <div>
                 <p>{{ post.content | safe }}</p>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                {% if user.is_authenticated %}
+                <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
+                    {% csrf_token %}
+                    {% if liked %}
+                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn"><i class="bi bi-heart-fill"></i></button>
+                    {% else %}
+                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn"><i class="bi bi-heart"></i></button>
+                    {% endif %}
+                </form>
+                {% else %}
+                <span class="btn"><i class="bi bi-heart"></i></span>
+                {% endif %}
+                <!-- The number of likes goes before the closing strong tag -->
+                <strong><span class="text-secondary">{{ post.number_of_likes }}</span></strong>
+            </div>
+            <div class="col-1">
+                <!-- This give the count of comments to the variable total_comments -->
+                {% with comments.count as total_comments %}
+                <span class="btn"><i class="bi bi-chat-text"></i></span>
+                <!-- The variable is then use to print the total number of comments-->
+                <strong class="text-secondary"></strong>{{ total_comments }}</strong>
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7 mb-4 mt-3 ">
+        <h3>Comments:</h3>
+        <div class="h-100">
+            <!-- For loop to iterate through all the comments -->
+            {% for comment in comments %}
+            <div class="comments" style="padding: 10px;">
+                <p class="font-weight-bold">
+                    <!-- This print the user name-->
+                    {{ comment.name }}
+                    <span class=" text-muted font-weight-normal">
+                        <!-- This print the date the comment was created -->
+                        {{ comment.created_on }}
+                    </span> wrote:
+                </p>
+                <!-- The body of the comment goes before the | -->
+                {{ comment.body | linebreaks }}
+            </div>
+            <!-- The comment loop ends here -->
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-4 mb-4 card mt-3 ">
+        <div class="">
+            <!-- For later -->
+            {% if commented %}
+            <div class="alert alert-success" role="alert">
+                Your comment is awaiting approval
+            </div>
+            {% else %}
+            {% if user.is_authenticated %}
+
+            <h3>Leave a comment:</h3>
+            <p>Posting as: {{ user.username }}</p>
+            <form method="post" style="margin-top: 1.3em;">
+                {{ comment_form | crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-signup right btn-outline-dark mt-1 mb-1">Submit</button>
+            </form>
+            {% endif %}
+            {% endif %}
         </div>
     </div>
 </div>
