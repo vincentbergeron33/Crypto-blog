@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+
+{% if user.is_authenticated %}
 <div class="py-5">
     <h1>Report a scam</h1>
     <div class="container px-4 px-lg-5 mt-5 card">
@@ -18,11 +21,11 @@
                 </p>
                 <p>
                     <label for="id_excerpt">Brief description</label>
-                    <textarea id="id_excerpt" name="scam_excerpt" rows="2" cols="25" class="d-md-block" required></textarea> 
+                    <textarea id="id_excerpt" name="scam_excerpt" rows="2" cols="75" class="d-md-block" required></textarea> 
                 </p>
                 <p>
                     <label for="id_content">Full description</label>
-                    <textarea id="id_content" name="scam_content" class="d-md-block" required></textarea> 
+                    <textarea id="id_content" name="scam_content" class="d-md-block" cols="75" required></textarea> 
                 </p>
                 <p>
                     <button type="submit" class="btn right btn-outline-dark">Report Scam</button>
@@ -31,4 +34,9 @@
         </form>
     </div>
 </div>
+{% else %}
+<div class="py-5 text-center">
+    <h2>You need to be signed in to report a scam</h2>
+</div>
+{% endif %}
 {% endblock content %}
