@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment
+from .models import Post, Comment, Scam
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -18,7 +18,18 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('post', 'name', 'email', 'created_on', 'approved')
     search_fields = ['name', 'email', 'post']
     list_filter = ('approved', 'email')
-    actions = ('approve_comments')
+    actions = ['approve_comments']
 
     def approve_comments(self, request, queryset):
+        queryset.update(approved=True)
+
+
+@admin.register(Scam)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('title', 'name', 'email', 'media', 'created_on', 'approved')
+    search_fields = ['name', 'email', 'media']
+    list_filter = ('approved', 'email', 'media')
+    actions = ['approve_scams']
+
+    def approve_scams(self, request, queryset):
         queryset.update(approved=True)
