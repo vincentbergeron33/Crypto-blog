@@ -5,7 +5,7 @@
         <h1>Reported scams</h1>
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            {% for scam in post_scam %}
+            {% for scam in scams %}
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product details-->
@@ -19,8 +19,14 @@
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'post_detail' post.slug %}">Full details</a></div>
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'scam_detail' scam.slug %}">Full details</a></div>
                         </div>
+                        {% if scam.email == request.user.email %}
+                        <div class="text-center mb-2">
+                            <a href="{% url 'edit' scam.slug %}"><button class="btn right btn-outline-dark">Edit</button></a>
+                            <a href="#"><button class='btn right btn-outline-dark'>Delete</button></a>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

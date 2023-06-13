@@ -5,15 +5,15 @@
 
 {% if user.is_authenticated %}
 <div class="py-5">
-    <h1>Report a scam</h1>
+    <h1>Edit your reported scam</h1>
     <div class="container px-4 px-lg-5 mt-5 card">
-        <form method="POST" action="add">
+        <form method="POST" action="edit">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="col-md-7 mb-4 justify-content-center">
                 <p>
                     <label for="id_tittle">Title: </label>
-                    <input type="text" id="id_title" name="scam_title" class="d-md-block" required> 
+                    <input type="text" id="id_title" name="scam_title" class="d-md-block" value="{{ scam.title }}" required> 
                 </p>
                 <label for="id_slug">Slug: </label>
                 <input type="text" id="id_slug" name="scam_slug" class="d-md-block" required> 
@@ -30,7 +30,7 @@
                     <textarea id="id_content" name="scam_content" class="d-md-block" cols="75" required></textarea> 
                 </p>
                 <p>
-                    <button type="submit" class="btn right btn-outline-dark">Report Scam</button>
+                    <button type="submit" class="btn right btn-outline-dark">Update Scam</button>
                 </p>
             </div>
         </form>
