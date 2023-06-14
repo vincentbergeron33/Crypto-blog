@@ -133,6 +133,7 @@ def add_scam(request, *args, **kwargs):
 
     return render(request, 'scam.html')
 
+
 def edit_scam(request, slug, *args, **kwargs):
     scam = get_object_or_404(Scam, slug=slug)
     if request.method == 'POST':
@@ -147,6 +148,12 @@ def edit_scam(request, slug, *args, **kwargs):
     }
 
     return render(request, 'edit.html', context)
+
+
+def delete_scam(request, slug, *args, **kwargs):
+    scam = get_object_or_404(Scam, slug=slug)
+    scam.delete()
+    return redirect('scam')
 
 
 class ScamDetail(View):

@@ -24,7 +24,7 @@
                         {% if scam.email == request.user.email %}
                         <div class="text-center mb-2">
                             <a href="{% url 'edit' scam.slug %}"><button class="btn right btn-outline-dark">Edit</button></a>
-                            <a href="#"><button class='btn right btn-outline-dark'>Delete</button></a>
+                            <a href="{% url 'delete' scam.slug %}" id="confirm-delete"><button class='btn right btn-outline-dark'>Delete</button></a>
                         </div>
                         {% endif %}
                     </div>
