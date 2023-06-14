@@ -340,6 +340,10 @@ label {
   display: inline-block;
 }
 
+form label {
+  display: block;
+}
+
 button {
   border-radius: 0;
 }

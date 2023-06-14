@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from .models import Post, Scam
 from django.http import HttpResponseRedirect
-from .forms import CommentForm
+from .forms import CommentForm, ScamForm
 
 
 class PostList(View):
@@ -133,22 +133,20 @@ def add_scam(request, *args, **kwargs):
 
     return render(request, 'scam.html')
 
-def edit_scam(request, *args, **kwargs):
+def edit_scam(request, slug, *args, **kwargs):
+    scam = get_object_or_404(Scam, slug=slug)
     if request.method == 'POST':
-        title = request.POST.get('scam_title')
-        slug = request.POST.get('scam_slug')
-        name = request.user.username
-        email = request.user.email
-        media = request.POST.get('scam_media')
-        excerpt = request.POST.get('scam_excerpt')
-        content = request.POST.get('scam_content')
-        Scam.objects.create(
-            title=title, media=media, excerpt=excerpt, content=content, 
-            name=name, email=email, slug=slug)
-
+        form = ScamForm(request.POST, instance=scam)
+        if form.is_valid():
+            form.save()
         return redirect('scam')
 
-    return render(request, 'edit.html')
+    form = ScamForm(instance=scam)
+    context = {
+        'form': form
+    }
+
+    return render(request, 'edit.html', context)
 
 
 class ScamDetail(View):
