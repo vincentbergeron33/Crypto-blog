@@ -5,8 +5,3 @@
 */
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
-
-var scam = document.getElementById('confirm-delete')
-scam.addEventListener('click', function(){
-    return confirm('Are you sure you want to delete this?');
-})

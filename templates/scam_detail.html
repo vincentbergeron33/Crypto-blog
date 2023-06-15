@@ -11,7 +11,7 @@
                 <!-- Post title goes in these h1 tags -->
                 <h1 class="post-title">{{ scam.title }}</h1>
                 <!-- Post author goes before the | the post's created date goes after -->
-                <p class="post-subtitle">{{ scam.author }} | {{ scam.created_on }} </p>
+                <p class="post-subtitle">{{ scam.created_on }} </p>
             </div>
             <div class="d-none d-md-block col-md-12 text-center">
                 <!-- The featured image URL goes in the src attribute -->
@@ -24,6 +24,12 @@
             <div class="d-none d-md-block col-md-12 text-center">
                 <p>{{ scam.content | safe }}</p>
             </div>
+            {% if scam.email == request.user.email %}
+            <div class="text-center mb-2">
+                <a href="{% url 'edit' scam.slug %}"><button class="btn right btn-outline-dark">Edit</button></a>
+                <a href="{% url 'confirmation' scam.slug %}" ><button class='btn right btn-outline-dark'>Delete</button></a>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

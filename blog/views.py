@@ -151,7 +151,8 @@ def edit_scam(request, slug, *args, **kwargs):
 
 
 def delete_confirmation(request, slug, *args, **kwargs):
-    scam = get_object_or_404(Scam, slug=slug)
+    queryset = Scam.objects.filter(approved=True)
+    scam = get_object_or_404(queryset, slug=slug)
 
     return render(request, 'confirmation.html', {
         'scam': scam,
@@ -159,7 +160,7 @@ def delete_confirmation(request, slug, *args, **kwargs):
     )
 
 
-def delete_scam(request, slug, *args, **kwargs):
+def delete_scam(self, request, slug, *args, **kwargs):
     scam = get_object_or_404(Scam, slug=slug)
     scam.delete()
     return redirect('scam')
@@ -179,7 +180,7 @@ class ScamDetail(View):
         )
 
     def post(self, request, slug, *args, **kwargs):
-        queryset = Post.objects.filter(status=1)
+        queryset = Post.objects.filter(approved=True)
         scam = get_object_or_404(queryset, slug=slug)
 
         return render(

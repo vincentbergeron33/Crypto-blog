@@ -8,7 +8,7 @@ urlpatterns = [
     path('report_scam/', views.PostScam.as_view(), name='report_scam'),
     path('report_scam/add', views.add_scam, name='add'),
     path('edit/<slug:slug>', views.edit_scam, name='edit'),
-    path('confirmation/<slug:slug>', views.delete_confirmation,
+    path('<slug:slug>', views.delete_confirmation,
          name='confirmation'),
     path('delete/<slug:slug>', views.delete_scam, name='delete'),
     path('<slug:slug>/', views.ScamDetail.as_view(), name='scam_detail'),

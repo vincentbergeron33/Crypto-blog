@@ -2,11 +2,11 @@
 
 {% block content %}
     <section class="py-5">
-        <h1 class="text-center">Are you sure you want to delete {{ scam.detail }}?</h1>
+        <h1 class="text-center">Are you sure you want to delete scam: {{ scam.title }}?</h1>
         <div>
             <div class="text-center mb-2 d-block">
-                <a href="{% url 'scam' %}"><button class="btn btn-outline-dark bg-success">No</button></a>
-                <a href="{% url 'delete' scam.slug %}" ><button class='btn btn-outline-dark bg-danger'>Yes</button></a>
+                <a href="{% url 'scam' %}"><button class="btn btn-lg btn-outline-dark-confirm bg-success">No</button></a>
+                <a href="{% url 'delete' scam.slug %}" ><button class='btn btn-lg btn-outline-dark-confirm bg-danger'>Yes</button></a>
             </div>
         </div>
     </section>
