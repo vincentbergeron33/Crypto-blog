@@ -150,6 +150,15 @@ def edit_scam(request, slug, *args, **kwargs):
     return render(request, 'edit.html', context)
 
 
+def delete_confirmation(request, slug, *args, **kwargs):
+    scam = get_object_or_404(Scam, slug=slug)
+
+    return render(request, 'confirmation.html', {
+        'scam': scam,
+        },
+    )
+
+
 def delete_scam(request, slug, *args, **kwargs):
     scam = get_object_or_404(Scam, slug=slug)
     scam.delete()
