@@ -4,6 +4,9 @@ from .models import Post, Scam
 from django.http import HttpResponseRedirect
 from .forms import CommentForm, ScamForm
 
+# Create the view for the list of posts and
+# seperate them on a page by their categorie
+
 
 class PostList(View):
     def get(self, request, *args, **kwargs):
@@ -13,10 +16,13 @@ class PostList(View):
             category_posts = Post.objects.filter(categorie=each_category)[:4]
             all_posts.append(
                 {"category": each_category, "posts": category_posts})
-       
+
         return render(request, "index.html", {
           "all_posts": all_posts,
         })
+
+# Create the view for the list of scams so that
+# they can be iterate on the html page to show all the scams
 
 
 class ScamList(generic.ListView):
@@ -28,6 +34,9 @@ class ScamList(generic.ListView):
         return render(request, 'scam.html', {
             "scams": queryset
         })
+
+# Create the view for the posts for each categorie so
+# all categorie can have their own page
 
 
 class CategoryPosts(View):
@@ -41,6 +50,9 @@ class CategoryPosts(View):
                 "categorie": category_name
             },
         )
+
+# Create the view for each seperate post when clicked where they
+# can be commented and liked
 
 
 class PostDetail(View):
@@ -94,6 +106,8 @@ class PostDetail(View):
             },
         )
 
+# So that post can be liked
+
 
 class PostLike(View):
 
@@ -106,6 +120,8 @@ class PostLike(View):
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
+# Create the view for all scams where then can be iterate on the main scam page
+
 
 class PostScam(View):
     def get(self, request, *args, **kwargs):
@@ -114,6 +130,8 @@ class PostScam(View):
             'scams': scams
         }
         return render(request, 'report_scam.html', context)
+
+# This function enable user to create a scam post on the website
 
 
 def add_scam(request, *args, **kwargs):
@@ -126,12 +144,14 @@ def add_scam(request, *args, **kwargs):
         excerpt = request.POST.get('scam_excerpt')
         content = request.POST.get('scam_content')
         Scam.objects.create(
-            title=title, media=media, excerpt=excerpt, content=content, 
+            title=title, media=media, excerpt=excerpt, content=content,
             name=name, email=email, slug=slug)
 
         return redirect('scam')
 
     return render(request, 'scam.html')
+
+# This function enable user to update a scam post on the website
 
 
 def edit_scam(request, slug, *args, **kwargs):
@@ -149,6 +169,9 @@ def edit_scam(request, slug, *args, **kwargs):
 
     return render(request, 'edit.html', context)
 
+# This function redirect the user to a page where
+# the user confirm to delete an item
+
 
 def delete_confirmation(request, slug, *args, **kwargs):
     queryset = Scam.objects.filter(approved=True)
@@ -159,11 +182,15 @@ def delete_confirmation(request, slug, *args, **kwargs):
         },
     )
 
+# This function enable user to delete a scam post on the website
+
 
 def delete_scam(self, request, slug, *args, **kwargs):
     scam = get_object_or_404(Scam, slug=slug)
     scam.delete()
     return redirect('scam')
+
+# Create the view for each seperate post when clicked
 
 
 class ScamDetail(View):

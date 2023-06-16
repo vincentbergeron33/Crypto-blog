@@ -2,6 +2,8 @@ from django.contrib import admin
 from .models import Post, Comment, Scam
 from django_summernote.admin import SummernoteModelAdmin
 
+# Create the management of posts for the super user
+
 
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
@@ -11,6 +13,8 @@ class PostAdmin(SummernoteModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('status', 'categorie')
     summernote_fields = ('content')
+
+# Create the management of comments for the super user
 
 
 @admin.register(Comment)
@@ -23,10 +27,13 @@ class CommentAdmin(admin.ModelAdmin):
     def approve_comments(self, request, queryset):
         queryset.update(approved=True)
 
+# Create the management of scam posts for the super user
+
 
 @admin.register(Scam)
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ('title', 'name', 'email', 'media', 'created_on', 'approved')
+class ScamAdmin(admin.ModelAdmin):
+    list_display = (
+        'title', 'name', 'email', 'media', 'created_on', 'approved')
     search_fields = ['name', 'email', 'media']
     list_filter = ('approved', 'email', 'media')
     actions = ['approve_scams']

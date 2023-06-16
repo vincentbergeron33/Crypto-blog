@@ -1,6 +1,8 @@
 from . import views
 from django.urls import path
 
+# The below create a path between the function from views and the html files
+
 
 urlpatterns = [
     path('', views.PostList.as_view(), name='home'),

@@ -4,14 +4,17 @@
 
 
 {% if user.is_authenticated %}
+<!-- This page shows the form to update a selected scam-->
 <div class="py-5">
     <h1>Edit your reported scam</h1>
     <div class="container px-4 px-lg-5 mt-5 card">
         <form method="POST">
             {% csrf_token %}
+            <!-- The form is already populated with its value-->
             {{ form.as_p }}
             <div class="col-md-7 mb-4 justify-content-center">
                 <p>
+                    <!-- By clicking the below button, the scam is updated into the database-->
                     <button type="submit" class="btn right btn-outline-dark">Update Scam</button>
                 </p>
             </div>

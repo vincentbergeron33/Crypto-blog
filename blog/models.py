@@ -2,7 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
+# The below will allow the superuser to create draft posts
+
 STATUS = ((0, "Draft"), (1, "Published"))
+
+# This value will be insert in the database struture as a categorie
 
 CATEGORIE_CHOICES = (
    ('Crypto News', 'Crypto News'),
@@ -10,6 +14,8 @@ CATEGORIE_CHOICES = (
    ('Exchange', 'Exchange'),
    ('Decentralize', 'Decentralize'),
 )
+
+# Create the database structure of the posts
 
 
 class Post(models.Model):
@@ -35,6 +41,8 @@ class Post(models.Model):
     def number_of_likes(self):
         return self.likes.count()
 
+# Create the database structure of the comments
+
 
 class Comment(models.Model):
     post = models.ForeignKey(
@@ -50,6 +58,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment {self.body} by {self.name}"
+
+# Create the database structure of the scams
 
 
 class Scam(models.Model):

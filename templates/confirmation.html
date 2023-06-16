@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Before deleting a scam, the user goes through this page to ensure he/she really wants to delete the scam-->
     <section class="py-5">
         <h1 class="text-center">Are you sure you want to delete scam: {{ scam.title }}?</h1>
         <div>
             <div class="text-center mb-2 d-block">
+                <!-- If the user click no, redirect the user to the scam page, if yes, the scam is deleted and redirect to scam page-->
                 <a href="{% url 'scam' %}"><button class="btn btn-lg btn-outline-dark-confirm bg-success">No</button></a>
                 <a href="{% url 'delete' scam.slug %}" ><button class='btn btn-lg btn-outline-dark-confirm bg-danger'>Yes</button></a>
             </div>
