@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- The below is simply using a loop in a loop to go through each categories and then go through all -->
+<!-- posts of that categorie before going to the next one-->
 {% for posts in all_posts %}
     <section class="py-5">
         <h1 id="{{ posts.category }}">{{ posts.category }}</h1>
@@ -9,22 +11,22 @@
             {% for post in posts.posts %}
                 <div class="col mb-5">
                     <div class="card h-100">
-                        <!-- Product image-->
+                        <!-- post image-->
                         {% if "placeholder" in post.featured_image.url %}
                         <img class="card-img-top" src="https://images.pexels.com/photos/4960464/pexels-photo-4960464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="..." />
                         {% else %}
                         <img class="card-img-top" src="{{ post.featured_image.url }}" alt="..." />
                         {% endif %}
-                        <!-- Product details-->
+                        <!-- Post details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Post title-->
                                 <h5 class="fw-bolder">{{ post.title }}</h5>
-                                <!-- Product price-->
+                                <!-- Post excerpt-->
                                 {{ post.excerpt }}
                             </div>
                         </div>
-                        <!-- Product actions-->
+                        <!-- link to the full post-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'post_detail' post.slug %}">Full article</a></div>
                         </div>
@@ -32,6 +34,7 @@
                 </div>
             {% endfor %}
             </div>
+            <!-- This link to all the posts of that categorie as the index page is limited to 4 articles per categorie-->
             <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'category_posts' posts.category %}">More posts</a></div>
         </div>
     </section>

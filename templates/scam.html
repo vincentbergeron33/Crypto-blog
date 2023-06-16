@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- The page show all the scam that has been approved by the superuser-->
     <section class="py-5">
         <h1>Reported scams</h1>
         <div class="container px-4 px-lg-5 mt-5">
@@ -8,20 +9,21 @@
             {% for scam in scams %}
                 <div class="col mb-5">
                     <div class="card h-100">
-                        <!-- Product details-->
                         <div class="card-body">
                             <div class="text-center">
-                                <!-- Post title-->
+                                <!-- Scam title-->
                                 <h5 class="fw-bolder">{{ scam.title }}</h5>
-                                <!-- Product price-->
+                                <!-- Scam brief description and created date-->
                                 <p>{{ scam.excerpt }}</p>
                                 <p>{{ scam.created_on }}</p>
                             </div>
                         </div>
-                        <!-- Product actions-->
+                        <!-- This is the link to the full detail of the scam-->
                         <div class="text-center mb-2">
                             <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'scam_detail' scam.slug %}">Full details</a></div>
                         </div>
+                        <!-- The below button are shown only if the original author of the scam is authenticated-->
+                        <!-- The orinated author can edit or delete his scam anytime-->
                         {% if scam.email == request.user.email %}
                         <div class="text-center mb-2">
                             <a href="{% url 'edit' scam.slug %}"><button class="btn right btn-outline-dark">Edit</button></a>

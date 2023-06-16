@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-*731yqdl_fm0*#bp+((g2l%6v14g_#$73zc9n2_@)drdyl27u2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-vincentberge-cryptoblog-qnas4ejmqlx.ws-eu99.gitpod.io', "cryptoblog.herokuapp.com", "localhost"]
+ALLOWED_HOSTS = ['8000-vincentberge-cryptoblog-qnas4ejmqlx.ws-eu100.gitpod.io', "cryptoblog.herokuapp.com", "localhost"]
 
 
 # Application definition

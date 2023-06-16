@@ -2,8 +2,9 @@
 
 {% block content %}
 
-
-{% if user.is_authenticated %}
+<!-- Again the page check if the original author of the scam is log in, only the original author of the scam-->
+<!-- can edit the scam or the superuser in the admin menu-->
+{% if scam.email == request.user.email %}
 <!-- This page shows the form to update a selected scam-->
 <div class="py-5">
     <h1>Edit your reported scam</h1>
@@ -21,9 +22,10 @@
         </form>
     </div>
 </div>
+<!-- If by any miracle another user get on the edit page of a certain scam he is not the author-->
 {% else %}
 <div class="py-5 text-center">
-    <h2>You need to be signed in to report a scam</h2>
+    <h2>You need to be the original author to edit a scam</h2>
 </div>
 {% endif %}
 {% endblock content %}

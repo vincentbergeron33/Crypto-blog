@@ -1,108 +1,110 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Chess Game
 
-Welcome Vincent Bergeron,
+This is a simple chess game coded with python. The board is printed on the console and players interact in the console to move their pieces.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+The live link can be found here: https://chess-game-vincent.herokuapp.com/
+![Am I Responsive](assets/images/amiresponsive.png)
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+## Features
 
-## Gitpod Reminders
+The chess game is printed in the console everytime a piece is moved. Text is printed to tell the user which turn it is and what they need to enter to be able to move their pieces. The board is in a grid from 0 to 7 where the users select coordinate of the piece he wants to play and then select the location he wants to move this piece. Text is printed when a player is check and the game stop when a player is checkmate.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+### Existing Features
 
-`python3 -m http.server`
+__Enter Username__
 
-A blue button should appear to click: _Make Public_,
+- At the beginning of the game, the users will enter their username. This is a simple input asking for the white and black player name.
 
-Another blue button should appear to click: _Open Browser_.
+![Usernames](assets/images/username.png)
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
 
-A blue button should appear to click: _Make Public_,
+__Print board__
 
-Another blue button should appear to click: _Open Browser_.
+- Everytime a player is starting his turn, the board will be printed into the console to help the user select his piece and move location
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+![Board Printed](assets/images/Board_printed.png)
 
-To log into the Heroku toolbelt CLI:
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+__Select piece and select move location__
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+- After the board is printed, the console ask the row and column of the piece the player would like to move. If the player select an empty location or the other player piece, it send back an error message and ask again the player to enter the row and column.
 
-------
+- Once the piece is chosen, it prints in the console the available moves for that specific piece. The console then ask for the row and column of the next location of the piece. If the row and column enter by the player is not in the available moves of the piece, it sends a message error and ask again the row and column of the move the player would like to undertake.
 
-## Release History
+- If there are no moves available for that piece, it send back an error message and ask to choose a valid piece.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+![Select Piece Location](assets/images/select_piece_location.png)
+![Select Location](assets/images/select_location.png)
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+__Move piece__
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+- Once the piece and the new location is choosen, the piece is move to the new location on the board.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+![New Location](assets/images/Board_printed.png)
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+__Check or Checkmate__
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+- At each turn, a code is checking if the current player is in check or checkmate. There are 3 conditions for the player to be checkmate:
+    - No available move for his king without being capture by his opponent.
+    - Not possible to capture the attacking piece that put the king in check or able to capture but expose the king to another attacking piece.
+    - Not possible to place a friendly piece to block the attacking piece or able to block the block the atacking piece but expose the king to another attacking piece.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+__Prevent wrong move when check__
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+- This last feature ensure the player not to play a move that will put his king into a check position and therefore conclude the game.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+### Features left to implement
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+- A draw function could be implemented. For this version, we take into consideration that player are experienced enough to understand when a draw is confirmed.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+- Python offers libraries for a better visual of the board. As this project is to learn the basic coding of python, this visual board was not implemented.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+## Testing
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+Testing has been undertaken during the construction of the code. A specific file called board_test was use to test separately each of the function.
 
-------
+See below example of tests that have been undertaken using the board_test file and prints inside the codes
 
-## FAQ about the uptime script
+![King testing](assets/images/testing_king.png)
+![Example testing](assets/images/testing_Knight.png)
+![Example testing #2](assets/images/testing_moves.png)
 
-**Why have you added this script?**
+### Validator Testing
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+- Finaly the code has been validated through the PEP8 Python Validator. The only result is ""Line too long" which is acceptable in this kind of code.
 
-**How will this affect me?**
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+### Unfixed Bugs
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+ - All bugs have been fixed.
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+## Deployment
 
-**So….?**
+- The project was deployed using the app Heroku. The steps explained in the Code Institue course have been followed:
+    - Complete the project and push it to Git Hub
+    - Create a Heroku account
+    - Create a app on Heroku account
+    - Link Git Hub to Heroku
+    - Search for the repository and add link it to Heroku
+    - Add the buildbacks Python and Node.JS
+    - Deploy the project
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+The live link can be found here: https://chess-game-vincent.herokuapp.com/
 
-**Can I opt out?**
+- Note that no creds are required for this project. Name of the python file has been changed from game to run to accomodate the Heroku requirement and all python files move to the main folder.
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+## Credits
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+- The coding itself was developed using the tool of the course. For details how to run specific functions, the website Stack Overflow was a great help. Please note that no code has been copy/paste from any website. The website was only a tool to understand the mechanic of the code.
 
-**Anything more?**
+### Content
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+- Non-applicable
 
----
+### Media
 
-Happy coding!
+- Non-applicable.
+
+

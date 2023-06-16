@@ -26,13 +26,13 @@ class PostList(View):
 
 
 class ScamList(generic.ListView):
-    def get(self, request, *args, **kwargs):
+    def get(slug, request, *args, **kwargs):
         model = Scam
         queryset = Scam.objects.filter(approved=True).order_by('-created_on')
         template_name = 'scam.html'
 
         return render(request, 'scam.html', {
-            "scams": queryset
+            "scams": queryset,
         })
 
 # Create the view for the posts for each categorie so
@@ -125,9 +125,9 @@ class PostLike(View):
 
 class PostScam(View):
     def get(self, request, *args, **kwargs):
-        scams = Scam.objects.all()
+        scam = Scam.objects.all()
         context = {
-            'scams': scams
+            'scam': scam
         }
         return render(request, 'report_scam.html', context)
 
@@ -155,7 +155,8 @@ def add_scam(request, *args, **kwargs):
 
 
 def edit_scam(request, slug, *args, **kwargs):
-    scam = get_object_or_404(Scam, slug=slug)
+    queryset = Scam.objects.filter(approved=True)
+    scam = get_object_or_404(queryset, slug=slug)
     if request.method == 'POST':
         form = ScamForm(request.POST, instance=scam)
         if form.is_valid():
@@ -164,7 +165,8 @@ def edit_scam(request, slug, *args, **kwargs):
 
     form = ScamForm(instance=scam)
     context = {
-        'form': form
+        'form': form,
+        'scam': scam
     }
 
     return render(request, 'edit.html', context)
@@ -207,7 +209,7 @@ class ScamDetail(View):
         )
 
     def post(self, request, slug, *args, **kwargs):
-        queryset = Post.objects.filter(approved=True)
+        queryset = Scam.objects.filter(approved=True)
         scam = get_object_or_404(queryset, slug=slug)
 
         return render(

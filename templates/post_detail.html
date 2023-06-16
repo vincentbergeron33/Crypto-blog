@@ -3,28 +3,30 @@
 {% block content %}
 
 {% load crispy_forms_tags %}
-
+<!-- This page shows the full details of each post-->
 <div class="masthead">
     <div class="container">
         <div class="row g-0">
             <div class="col-md-12 text-center">
-                <!-- Post title goes in these h1 tags -->
+                <!-- Post title-->
                 <h1 class="post-title">{{ post.title }}</h1>
-                <!-- Post author goes before the | the post's created date goes after -->
+                <!-- Post author and date & time he has been created -->
                 <p class="post-subtitle">{{ post.author }} | {{ post.created_on }} </p>
             </div>
             <div class="d-none d-md-block col-md-12 text-center">
-                <!-- The featured image URL goes in the src attribute -->
+                <!-- The post image, the default image is used if no pictre is uploaded -->
                 {% if "placeholder" in post.featured_image.url %}
                 <img class='card-img-top' src="https://images.pexels.com/photos/4960464/pexels-photo-4960464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width="100%">
                 {% else %}
                 <img class='card-img-top' src=" {{ post.featured_image.url }}" width="100%">
                 {% endif %}
             </div>
+            <!-- Post content-->
             <div>
                 <p>{{ post.content | safe }}</p>
             </div>
         </div>
+        <!-- This section allow an authenticad user to like the post-->
         <div class="row">
             <div class="col-1">
                 {% if user.is_authenticated %}
@@ -37,47 +39,43 @@
                     {% endif %}
                 </form>
                 {% else %}
+                <!-- If the user is not logged in, he will only see the number of likes and wont be able to like-->
                 <span class="btn"><i class="bi bi-heart"></i></span>
                 {% endif %}
-                <!-- The number of likes goes before the closing strong tag -->
                 <strong><span class="text-secondary">{{ post.number_of_likes }}</span></strong>
             </div>
             <div class="col-1">
-                <!-- This give the count of comments to the variable total_comments -->
+                <!-- Same feature as for the likes but with the comments, to see the number of comments -->
                 {% with comments.count as total_comments %}
                 <span class="btn"><i class="bi bi-chat-text"></i></span>
-                <!-- The variable is then use to print the total number of comments-->
                 <strong class="text-secondary"></strong>{{ total_comments }}</strong>
                 {% endwith %}
             </div>
         </div>
     </div>
 </div>
+<!-- This section show the existing comments that have been approved on the post-->
 <div class="row">
     <div class="col-md-7 mb-4 mt-3 ">
         <h3>Comments:</h3>
         <div class="h-100">
-            <!-- For loop to iterate through all the comments -->
+            <!-- The loop iterate thourgh the comments to show them on the page -->
             {% for comment in comments %}
             <div class="comments" style="padding: 10px;">
                 <p class="font-weight-bold">
-                    <!-- This print the user name-->
                     {{ comment.name }}
                     <span class=" text-muted font-weight-normal">
-                        <!-- This print the date the comment was created -->
                         {{ comment.created_on }}
                     </span> wrote:
                 </p>
-                <!-- The body of the comment goes before the | -->
                 {{ comment.body | linebreaks }}
             </div>
-            <!-- The comment loop ends here -->
             {% endfor %}
         </div>
     </div>
     <div class="col-md-4 mb-4 card mt-3 ">
         <div class="">
-            <!-- For later -->
+            <!-- This section allow an authenticated user to comment on the post or to see if comment is awaiting approval-->
             {% if commented %}
             <div class="alert alert-success" role="alert">
                 Your comment is awaiting approval

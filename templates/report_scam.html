@@ -2,7 +2,7 @@
 
 {% block content %}
 
-
+<!-- The user most be authenticated to post a scam-->
 {% if user.is_authenticated %}
 <div class="py-5">
     <h1>Report a scam</h1>
@@ -11,6 +11,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <div class="col-md-7 mb-4 justify-content-center">
+                <!-- All field are required-->
                 <p>
                     <label for="id_tittle">Title: </label>
                     <input type="text" id="id_title" name="scam_title" class="d-md-block" required> 
@@ -21,6 +22,7 @@
                     <label for="id_media">What social media were you contacted from?</label>
                     <input type="text" id="id_media" name="scam_media" class="d-md-block" required> 
                 </p>
+                <!-- The excerpt is essential here to ensure a brief description is shown on the scam page-->
                 <p>
                     <label for="id_excerpt">Brief description</label>
                     <textarea id="id_excerpt" name="scam_excerpt" rows="2" cols="75" class="d-md-block" required></textarea> 
@@ -29,6 +31,7 @@
                     <label for="id_content">Full description</label>
                     <textarea id="id_content" name="scam_content" class="d-md-block" cols="75" required></textarea> 
                 </p>
+                <!-- By clicking submit, the scam is sent to the superuser and required approval before being viewed on the page-->
                 <p>
                     <button type="submit" class="btn right btn-outline-dark">Report Scam</button>
                 </p>
@@ -36,6 +39,7 @@
         </form>
     </div>
 </div>
+<!-- User most be authenticated to issue a scam, this is to filter inappropriate posts-->
 {% else %}
 <div class="py-5 text-center">
     <h2>You need to be signed in to report a scam</h2>
