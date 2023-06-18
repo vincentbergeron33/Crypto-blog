@@ -1,79 +1,105 @@
-# Chess Game
+# Crypto Blog
 
-This is a simple chess game coded with python. The board is printed on the console and players interact in the console to move their pieces.
+The project is a full stack developed website with 2 main features. The first feature is a blog where the Site User can read, comment and like the different articles which are divided in 4 categories: Crypto News, Bitcoin, Exchange and Decentralize. In this feature, only the admin can post article and use the Django admin panel to do so. The admin can also use the Django admin panel to update and delete articles. The second feature allow registered user to report a scam which can be view on the scam page once it is approved by the admin. Once approved, the registered user can edit or delete his post. None registered user can only view the scams. The website aim to educate the users about Crytocurrencies and help them avoid existing scams.
 
 The live link can be found here: https://chess-game-vincent.herokuapp.com/
 ![Am I Responsive](assets/images/amiresponsive.png)
 
 ## Features
 
-The chess game is printed in the console everytime a piece is moved. Text is printed to tell the user which turn it is and what they need to enter to be able to move their pieces. The board is in a grid from 0 to 7 where the users select coordinate of the piece he wants to play and then select the location he wants to move this piece. Text is printed when a player is check and the game stop when a player is checkmate.
+There are 2 main features on the websites: The blog and the scam librairy.
 
-### Existing Features
+### Blog
 
-__Enter Username__
+This feature is for registered and unregistered user.
 
-- At the beginning of the game, the users will enter their username. This is a simple input asking for the white and black player name.
+__Categories__
 
-![Usernames](assets/images/username.png)
+- The blog is divided in 4 categories:
+    - Crypto News: General news in the crypto worls
+    - Bitcoin: Article specific to Bitcoin
+    - Exchange: Article specific to exchanges
+    - Decentralize: Article specific to decentralize apps
 
+![Main Page](media/categories.png)
 
-__Print board__
+- The main page is limited to a maximum of 4 article per category. When the user click on "More posts", the user is redirected to a page specific to that category with all available articles regarding that category.
 
-- Everytime a player is starting his turn, the board will be printed into the console to help the user select his piece and move location
+![Buttons categories and details](media/buttons.png)
 
-![Board Printed](assets/images/Board_printed.png)
+__Full article__
 
+- Each article is presented with a picture, title, and an excerpt. When the user click on "Full article", the user is redirected to a page with the full detail of the article.
 
-__Select piece and select move location__
+![Article details](media/post_detail.png)
+ 
+__Comment & likes__
 
-- After the board is printed, the console ask the row and column of the piece the player would like to move. If the player select an empty location or the other player piece, it send back an error message and ask again the player to enter the row and column.
+- On this full article page, the user can see the comments and likes regarding that article. If the user is registered, the user can add a comment or like the article. Comments required to be approved by the admin before being showed on the page.
 
-- Once the piece is chosen, it prints in the console the available moves for that specific piece. The console then ask for the row and column of the next location of the piece. If the row and column enter by the player is not in the available moves of the piece, it sends a message error and ask again the row and column of the move the player would like to undertake.
+![Article details](media/comments_likes.png)
 
-- If there are no moves available for that piece, it send back an error message and ask to choose a valid piece.
+### Scam librairy
 
-![Select Piece Location](assets/images/select_piece_location.png)
-![Select Location](assets/images/select_location.png)
+User can view existing scams and registered user can report scams.
 
+__View report scams__
 
-__Move piece__
+- All site users can view the reported scams on the scam page. Each scam is shown with a title, a brief description, the date it has been reported and a link to the full details of the scam. When the user click on "Full details" link, the user is redirected to a page with the full details of the scam.
 
-- Once the piece and the new location is choosen, the piece is move to the new location on the board.
+![Reported scams](media/scams.png)
 
-![New Location](assets/images/Board_printed.png)
+__Report/edit/delete a scam__
 
-__Check or Checkmate__
+- A registered user can report a scam through the Report a scam link on the top left of the page. Once clicked, the registered user has to fill a form which all fields are required. Once completed and posted, the scam is waiting approval from the admin of the site before being viewed on the scam page.
 
-- At each turn, a code is checking if the current player is in check or checkmate. There are 3 conditions for the player to be checkmate:
-    - No available move for his king without being capture by his opponent.
-    - Not possible to capture the attacking piece that put the king in check or able to capture but expose the king to another attacking piece.
-    - Not possible to place a friendly piece to block the attacking piece or able to block the block the atacking piece but expose the king to another attacking piece.
+![Report a scam](media/report_scam.png)
 
-__Prevent wrong move when check__
+- Once a scam is approved by the admin, it is shown on the scam page. The original author of the reported scam has the possibility to edit or delete his scam. When the original author click on the edit button, he/she redirected to a page where the form field are already filled with original values of the scam. After changing the desirable values from the form, the original author can click on update scam and the scam will be automatically updated.
 
-- This last feature ensure the player not to play a move that will put his king into a check position and therefore conclude the game.
+![Edit a scam](media/edit_scam.png)
+
+- The original author can also delete his scam once it is shown on the page by clicking the button delete. When the delete button is clicked, it will redirect the  author to a confirmation page. "Yes" will delete the scam, "No" will keep the scam. In both situation, the author will be redirected to the scam page after the click.
+
+![Delete a scam](media/Delete_scam.png)
+
+## Admin features
+
+__Issue posts__
+
+- The admin can issue post through the django admin panel. The admin can also keep draft post and only published once the post is ready. If no image are uploaded when creating a post, a default picture will be shown on the website. Summernote API is set up for styling of the content created through the django admin panel. In the django admin panel, the most relevant data from the model are shown, a filter option is available and a action to delete any of the selected post.
+
+![Django admin post](media/posts.png)
+![Django admin post form](media/issue_post.png)
+
+__Approve comments & scams__
+
+- The admin can see all comments or scams that is not approved in the django admin panel. The admin can simply approved the comments or scams by using the action approve comments/scams after selectioning the relevant comments/scams. Different data are shown in the table to make it more relevant to comments and scams like the email and name of the issuer. Filters are also available for the comments and scams section.
+
+![Django admin comments](media/comments.png)
+![Django admin scams](media/scams_admin.png)
 
 ### Features left to implement
 
-- A draw function could be implemented. For this version, we take into consideration that player are experienced enough to understand when a draw is confirmed.
-
-- Python offers libraries for a better visual of the board. As this project is to learn the basic coding of python, this visual board was not implemented.
+- A search option could be implemented in the scam page to search through the tittles.
 
 
 ## Testing
 
-Testing has been undertaken during the construction of the code. A specific file called board_test was use to test separately each of the function.
-
-See below example of tests that have been undertaken using the board_test file and prints inside the codes
-
-![King testing](assets/images/testing_king.png)
-![Example testing](assets/images/testing_Knight.png)
-![Example testing #2](assets/images/testing_moves.png)
 
 ### Validator Testing
 
-- Finaly the code has been validated through the PEP8 Python Validator. The only result is ""Line too long" which is acceptable in this kind of code.
+## HTML W3 validator
+
+- All html pages have been run through the validator. Only one error have been detected regarding the {{ post.content|safe }} command. After research and test, it looks like the validator struggle to load the css and show parse error.
+
+## CSS validator
+
+- No error have been found except error linked to using Bootstrap and startbootstrap.
+
+## PEP8 Python Validator
+
+- Finaly the code has been validated through the PEP8 Python Validator. The only result is ""Line too long" in the setting.py which is acceptable.
 
 
 ### Unfixed Bugs
@@ -97,7 +123,7 @@ The live link can be found here: https://chess-game-vincent.herokuapp.com/
 
 ## Credits
 
-- The coding itself was developed using the tool of the course. For details how to run specific functions, the website Stack Overflow was a great help. Please note that no code has been copy/paste from any website. The website was only a tool to understand the mechanic of the code.
+- The coding itself was developed using the tool of the course. For details how to run specific functions, the website Stack Overflow was a great help. Please note that no code has been copy/paste from any website. The website was only a tool to understand the mechanic of the code. My tutor really helped me in developping new unlearn functions.
 
 ### Content
 

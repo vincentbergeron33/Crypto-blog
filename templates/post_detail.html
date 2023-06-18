@@ -4,26 +4,26 @@
 
 {% load crispy_forms_tags %}
 <!-- This page shows the full details of each post-->
-<div class="masthead">
+<div>
     <div class="container">
         <div class="row g-0">
             <div class="col-md-12 text-center">
                 <!-- Post title-->
-                <h1 class="post-title">{{ post.title }}</h1>
+                <h1>{{ post.title }}</h1>
                 <!-- Post author and date & time he has been created -->
-                <p class="post-subtitle">{{ post.author }} | {{ post.created_on }} </p>
+                <p>{{ post.author }} | {{ post.created_on }}</p>
             </div>
             <div class="d-none d-md-block col-md-12 text-center">
                 <!-- The post image, the default image is used if no pictre is uploaded -->
                 {% if "placeholder" in post.featured_image.url %}
-                <img class='card-img-top' src="https://images.pexels.com/photos/4960464/pexels-photo-4960464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width="100%">
+                <img class='card-img-top' alt="image of crypto relevant to the title of the article" src="https://images.pexels.com/photos/4960464/pexels-photo-4960464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" style="width:100%">
                 {% else %}
-                <img class='card-img-top' src=" {{ post.featured_image.url }}" width="100%">
+                <img class='card-img-top' src=" {{ post.featured_image.url }}" alt="image of crypto relevant to the title of the article" style="width:100%">
                 {% endif %}
             </div>
             <!-- Post content-->
             <div>
-                <p>{{ post.content | safe }}</p>
+                <p>{{ post.content|safe }}</p>
             </div>
         </div>
         <!-- This section allow an authenticad user to like the post-->
@@ -48,7 +48,7 @@
                 <!-- Same feature as for the likes but with the comments, to see the number of comments -->
                 {% with comments.count as total_comments %}
                 <span class="btn"><i class="bi bi-chat-text"></i></span>
-                <strong class="text-secondary"></strong>{{ total_comments }}</strong>
+                <strong class="text-secondary">{{ total_comments }}</strong>
                 {% endwith %}
             </div>
         </div>
