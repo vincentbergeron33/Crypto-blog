@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-*731yqdl_fm0*#bp+((g2l%6v14g_#$73zc9n2_@)drdyl27u2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-vincentberge-cryptoblog-qnas4ejmqlx.ws-eu100.gitpod.io', "cryptoblog.herokuapp.com", "localhost"]
+ALLOWED_HOSTS = ['8000-vincentberge-cryptoblog-ke5wz9lrsvz.ws-eu100.gitpod.io', "cryptoblog.herokuapp.com", "localhost"]
 
 
 # Application definition
@@ -101,16 +101,16 @@ WSGI_APPLICATION = 'cryptoblog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
-
 DATABASES = {
-   'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+   'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': BASE_DIR / 'db.sqlite3',
+   }
 }
+
+#DATABASES = {
+#    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+#}
 
 
 

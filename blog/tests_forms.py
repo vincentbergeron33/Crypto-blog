@@ -5,6 +5,13 @@ from .forms import CommentForm, ScamForm
 
 
 class TestCommentForm(TestCase):
-    def test_fields_are_explicit_in_form_metaclass(self):
+    def test_fields_are_explicit_in_comment_form_metaclass(self):
         form = CommentForm()
-        self.assertEqual(form.Meta.fields, ['body',])
+        self.assertEqual(form.Meta.fields, ('body',))
+
+
+class TestScamForm(TestCase):
+    def test_fields_are_explicit_in_scam_form_metaclass(self):
+        form = ScamForm()
+        self.assertEqual(form.Meta.fields, (
+            'title', 'media', 'excerpt', 'content'))
