@@ -187,7 +187,7 @@ def delete_confirmation(request, slug, *args, **kwargs):
 # This function enable user to delete a scam post on the website
 
 
-def delete_scam(self, request, slug, *args, **kwargs):
+def delete_scam(self, slug, *args, **kwargs):
     scam = get_object_or_404(Scam, slug=slug)
     scam.delete()
     return redirect('scam')
