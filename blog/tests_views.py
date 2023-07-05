@@ -99,3 +99,27 @@ class TestViews(TestCase):
         response = self.client.get(reverse('scam_detail', args=(scam.slug,)))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'scam_detail.html')
+
+    def test_can_add_comment_on_post(self):
+        test_user = self.user1
+        self.client.force_login(test_user)
+        post = Post.objects.create(
+            slug='Test', title='Test', author=test_user, status=1)
+        response = self.client.post(f'/{post.slug}/', {
+            'post': post, 'name': test_user.username,
+            'email': test_user.email, 'body': 'testing',
+            'approved': True})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'post_detail.html')
+        existing_comment = Comment.objects.filter(name=test_user.username)
+        self.assertEqual(len(existing_comment), 1)
+
+    def test_can_add_like(self):
+        test_user = self.user1
+        self.client.force_login(test_user)
+        post = Post.objects.create(
+            slug='Test', title='Test', author=test_user, status=1)
+        response = self.client.post(
+            'post_like', args=(post.slug,))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'post_detail.html')
