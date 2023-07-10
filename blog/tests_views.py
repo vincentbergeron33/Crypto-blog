@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from .models import Post, Comment, Scam
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
+from .forms import CommentForm, ScamForm
 
 
 class TestViews(TestCase):
@@ -117,9 +118,37 @@ class TestViews(TestCase):
     def test_can_add_like(self):
         test_user = self.user1
         self.client.force_login(test_user)
+        test_post = Post.objects.create(
+            slug='Testing123', title='Test', author=test_user, status=1)
+        response = self.client.post(f'/like/{test_post.slug}/')
+        self.assertRedirects(response, f'/{test_post.slug}/')
+        self.assertEqual(
+            test_post.likes.filter(id=test_user.id).exists(), True)
+        response = self.client.post(f'/like/{test_post.slug}/')
+        self.assertEqual(
+            test_post.likes.filter(id=test_user.id).exists(), False)
+
+    def test_like_show_true_if_liked(self):
+        test_user = self.user1
+        self.client.force_login(test_user)
+        test_post = Post.objects.create(
+            slug='Testing123', title='Test', author=test_user, status=1)
+        response = self.client.post(
+            reverse('post_detail', args=(test_post.slug,)))
+        self.assertEqual(response.context['liked'], False)
+        self.client.post(f'/like/{test_post.slug}/')
+        response = self.client.post(
+            reverse('post_detail', args=(test_post.slug,)))
+        self.assertEqual(response.context['liked'], True)
+
+    def test_when_comment_form_is_not_valid(self):
+        test_user = self.user1
+        self.client.force_login(test_user)
         post = Post.objects.create(
             slug='Test', title='Test', author=test_user, status=1)
-        response = self.client.post(
-            'post_like', args=(post.slug,))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'post_detail.html')
+        response = self.client.post(f'/{post.slug}/', {
+            'post': post, 'name': test_user.username,
+            'email': 'not an email', 'body': 'testing',
+            'approved': True})
+        print('valid:', response.context['comment_form'].is_valid())
+        self.assertEqual(response.context['comment_form'], CommentForm())

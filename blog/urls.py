@@ -17,5 +17,5 @@ urlpatterns = [
     path('<str:slug>/', views.ScamDetail.as_view(), name='scam_detail'),
     path('category/<str:category_name>/', views.CategoryPosts.as_view(),
          name='category_posts'),
-    path('like/<slug:slug>', views.PostLike.as_view(), name='post_like'),
+    path('like/<slug:slug>/', views.PostLike.as_view(), name='post_like'),
 ]
