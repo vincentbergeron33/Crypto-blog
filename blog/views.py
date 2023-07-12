@@ -207,15 +207,3 @@ class ScamDetail(View):
                 "scam": scam,
             },
         )
-
-    def post(self, request, slug, *args, **kwargs):
-        queryset = Scam.objects.filter(approved=True)
-        scam = get_object_or_404(queryset, slug=slug)
-
-        return render(
-            request,
-            "scam_detail.html",
-            {
-                "scam": scam,
-            },
-        )

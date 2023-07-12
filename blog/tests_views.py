@@ -50,6 +50,17 @@ class TestViews(TestCase):
             'scam_content': 'Testing'})
         self.assertRedirects(response, '/scam/')
 
+    def test_can_get_add_scam(self):
+        test_user = self.user1
+        self.client.force_login(test_user)
+        scam = Scam.objects.create(
+            title='test', slug='testing', name='Tester',
+            email='test@gmail.com', media='tester', excerpt='description',
+            content='details', approved=True)
+        response = self.client.get('/report_scam/add')
+        print('get add', response)
+        self.assertTemplateUsed(response, 'scam.html')
+
     def test_can_edit_scam(self):
         test_user = self.user1
         self.client.force_login(test_user)
@@ -66,6 +77,17 @@ class TestViews(TestCase):
         self.assertRedirects(response, '/scam/')
         updated_scam = Scam.objects.get(slug=scam.slug)
         self.assertEqual(updated_scam.title, 'Updated Title')
+
+    def test_can_get_edit_scam(self):
+        test_user = self.user1
+        self.client.force_login(test_user)
+        scam = Scam.objects.create(
+            title='test', slug='testing', name='Tester',
+            email='test@gmail.com', media='tester', excerpt='description',
+            content='details', approved=True)
+        response = self.client.get(f'/edit/{scam.slug}')
+        print('get add', response)
+        self.assertTemplateUsed(response, 'edit.html')
 
     def test_delete_confirmation(self):
         test_user = self.user1
@@ -151,4 +173,4 @@ class TestViews(TestCase):
             'email': 'not an email', 'body': 'testing',
             'approved': True})
         print('valid:', response.context['comment_form'].is_valid())
-        self.assertEqual(response.context['comment_form'], CommentForm())
+        self.assertFalse(response.context['comment_form'].is_valid())

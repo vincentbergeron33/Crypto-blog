@@ -101,6 +101,12 @@ __Approve comments & scams__
 
 - Finaly the code has been validated through the PEP8 Python Validator. The only result is ""Line too long" in the setting.py which is acceptable.
 
+## TestCase
+
+- A full coverage of the files have been tested through Testcase. Those tests can be found in the tests_forms, tests_models and tests_views files.
+
+
+![Testing Coverage](media/testing_coverage.png)
 
 ### Unfixed Bugs
 
