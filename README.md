@@ -2,8 +2,8 @@
 
 The project is a full stack developed website with 2 main features. The first feature is a blog where the Site User can read, comment and like the different articles which are divided in 4 categories: Crypto News, Bitcoin, Exchange and Decentralize. In this feature, only the admin can post article and use the Django admin panel to do so. The admin can also use the Django admin panel to update and delete articles. The second feature allow registered user to report a scam which can be view on the scam page once it is approved by the admin. Once approved, the registered user can edit or delete his post. None registered user can only view the scams. The website aim to educate the users about Crytocurrencies and help them avoid existing scams.
 
-The live link can be found here: https://chess-game-vincent.herokuapp.com/
-![Am I Responsive](assets/images/amiresponsive.png)
+The live link can be found here: https://cryptoblog.herokuapp.com/
+![Welcome](media/Welcome_page.png)
 
 ## Features
 
@@ -81,7 +81,7 @@ __Approve comments & scams__
 
 ### Features left to implement
 
-- A search option could be implemented in the scam page to search through the tittles.
+- A search option could be implemented in the scam page to search through the titles.
 
 
 ## Testing
@@ -115,17 +115,20 @@ __Approve comments & scams__
 ## Deployment
 
 - The project was deployed using the app Heroku. The steps explained in the Code Institue course have been followed:
-    - Complete the project and push it to Git Hub
+    - Create a new external database using ElephantSQL
     - Create a Heroku account
     - Create a app on Heroku account
-    - Link Git Hub to Heroku
+    - Link Git Hub to Heroku and
     - Search for the repository and add link it to Heroku
-    - Add the buildbacks Python and Node.JS
+    - Attach the database to the env file and on Heroku
+    - Prepare the setting files to link the database using the keys in env file
+    - Create a Cloudinary account
+    - Create and store static and media files on Cloudinary
+    - Link Cloudinary in settings (using env for keys) and in Heroku
+    - Add, commit and push on github
     - Deploy the project
 
-The live link can be found here: https://chess-game-vincent.herokuapp.com/
-
-- Note that no creds are required for this project. Name of the python file has been changed from game to run to accomodate the Heroku requirement and all python files move to the main folder.
+The live link can be found here: https://cryptoblog.herokuapp.com/
 
 ## Credits
 
