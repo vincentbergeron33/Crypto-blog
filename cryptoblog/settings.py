@@ -34,7 +34,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     '8000-vincentberge-cryptoblog-e7opt3c0v2i.ws-eu105.gitpod.io',
-    "cryptoblog.herokuapp.com", "localhost"]
+    "https://cryptoblog-9d57f9a3fbcc.herokuapp.com/", "localhost"]
 
 
 # Application definition
