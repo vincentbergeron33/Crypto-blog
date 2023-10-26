@@ -2,7 +2,7 @@
 
 The project is a full stack developed website with 2 main features. The first feature is a blog where the Site User can read, comment and like the different articles which are divided in 4 categories: Crypto News, Bitcoin, Exchange and Decentralize. In this feature, only the admin can post article and use the Django admin panel to do so. The admin can also use the Django admin panel to update and delete articles. The second feature allow registered user to report a scam which can be view on the scam page once it is approved by the admin. Once approved, the registered user can edit or delete his post. None registered user can only view the scams. The website aim to educate the users about Crytocurrencies and help them avoid existing scams.
 
-The live link can be found here: https://cryptoblog.herokuapp.com/
+The live link can be found here: [https://cryptoblog.herokuapp.com/](https://cryptoblog-9d57f9a3fbcc.herokuapp.com/)
 ![Welcome](media/Welcome_page.png)
 
 ## Features
@@ -128,7 +128,7 @@ __Approve comments & scams__
     - Add, commit and push on github
     - Deploy the project
 
-The live link can be found here: https://cryptoblog.herokuapp.com/
+The live link can be found here: [https://cryptoblog.herokuapp.com/](https://cryptoblog-9d57f9a3fbcc.herokuapp.com/)
 
 ## Credits
 
