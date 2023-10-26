@@ -27,13 +27,13 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*731yqdl_fm0*#bp+((g2l%6v14g_#$73zc9n2_@)drdyl27u2'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '8000-vincentberge-cryptoblog-ke5wz9lrsvz.ws-eu101.gitpod.io',
+    '8000-vincentberge-cryptoblog-e7opt3c0v2i.ws-eu105.gitpod.io',
     "cryptoblog.herokuapp.com", "localhost"]
 
 
